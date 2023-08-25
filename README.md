@@ -6,7 +6,7 @@ The main objective of this project is to reproduce this project selling on
 
 Example of the Etsy product:
 
-<img src="https://raw.githubusercontent.com/ronanren/CryptoTickerLed/main/img/EtsyProduct.png?token=GHSAT0AAAAAACCJWAZTKFCQ2PDOIR77TZ3UZHHTLIA" width="400">
+<img src="https://github.com/ronanren/CryptoTickerLed/blob/main/img/EtsyProduct.png?raw=true" width="400">
 
 ## Hardware
 
