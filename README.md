@@ -22,3 +22,5 @@ total : ~150$ (with shipping)
 Tutorial: https://learn.adafruit.com/adafruit-rgb-matrix-bonnet-for-raspberry-pi/driving-matrices
 
 ## Software
+
+Python bindings : https://github.com/hzeller/rpi-rgb-led-matrix/tree/master/bindings/python
