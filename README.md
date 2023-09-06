@@ -19,8 +19,11 @@ total : ~150$ (with shipping)
 
 ## Hardware configuration
 
-Tutorial: https://learn.adafruit.com/adafruit-rgb-matrix-bonnet-for-raspberry-pi/driving-matrices
+To connect the RGB Matrix to the Raspberry Pi, follow the instructions on the Adafruit website: https://learn.adafruit.com/adafruit-rgb-matrix-bonnet-for-raspberry-pi/driving-matrices
 
 ## Software
+
+1. Install [dietpi](https://dietpi.com/) on the Raspberry Pi (installation guide: https://dietpi.com/docs/install/)
+2. Git clone this repository
 
 Python bindings : https://github.com/hzeller/rpi-rgb-led-matrix/tree/master/bindings/python
