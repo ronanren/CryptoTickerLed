@@ -24,18 +24,24 @@ To connect the RGB Matrix to the Raspberry Pi, follow the instructions on the Ad
 ## Software
 
 1. Install [dietpi](https://dietpi.com/) on the Raspberry Pi (installation guide: https://dietpi.com/docs/install/)
-2. Git clone this repository
-3. Install dependencies:
+2. Install Git with 'sudo dietpi-software' command
+3. Git clone this repository
+4. Add sources in /etc/apt/sources.list:
 ```bash
-sudo apt-get update && sudo apt-get install python2.7-dev python-pillow -y
-make build-python
+deb http://deb.debian.org/debian/ buster main
+deb-src http://deb.debian.org/debian/ buster main
+```
+5. Install dependencies:
+```bash
+sudo apt-get update && sudo apt-get install python2.7-dev python-pillow make build-essential -y
+make build-python CC=gcc
 sudo make install-python
 ```
 
 Test:
 ```bash
 cd samples
-sudo ./runtext.py
+sudo ./runtext.py --led-gpio-mapping=adafruit-hat --led-rows=32 --led-cols=64 --led-slowdown-gpio=2
 ```
 
 Python bindings : https://github.com/hzeller/rpi-rgb-led-matrix/tree/master/bindings/python
