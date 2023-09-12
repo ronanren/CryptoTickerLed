@@ -3,7 +3,7 @@
 from samplebase import SampleBase
 from rgbmatrix import graphics
 import time, random
-
+from coingecko_api import get_crypto_data
 
 class Run(SampleBase):
     def __init__(self, *args, **kwargs):
