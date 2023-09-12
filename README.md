@@ -47,4 +47,8 @@ cd project
 sudo ./run.py --led-gpio-mapping=adafruit-hat --led-rows=32 --led-cols=64 --led-slowdown-gpio=2
 ```
 
+## Crypto API
+
+I use the [CoinGecko API](https://www.coingecko.com/en/api/documentation) to get the current price of cryptocurrencies and the historical price to display the evolution of the price on the led matrix.
+
 
