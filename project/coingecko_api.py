@@ -60,6 +60,6 @@ def plot_candlestick(chart, max_height=15):
     for row in chart_console:
         print(''.join(row))
    
-data = get_crypto_data("ethereum", "5min")
+data = get_crypto_data("bitcoin", "1h")
 plot_candlestick(data["chart"])
-# print(data)
+print(data)
