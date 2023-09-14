@@ -9,13 +9,14 @@ function App() {
   const [displays, setDisplays] = useState([]);
 
   const handleAddDisplay = async (newDisplay) => {
-    console.log(newDisplay);
+    setDisplays(displays.displays.push(newDisplay));
+
     fetch('http://localhost:3001/write-json', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(newDisplay)
+      body: JSON.stringify(displays)
     });
   };
 
