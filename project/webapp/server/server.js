@@ -15,14 +15,15 @@ const io = new Server(server, {
 });
 
 io.on('connection', (socket) => {
-	console.log('A user connected');
+	console.log('Webapp connected');
 
-	socket.on('chat message', (message) => {
-		io.emit('chat message', message);
+	socket.on('action', (message) => {
+		io.emit('action', message);
+		console.log('action', message);
 	});
 
 	socket.on('disconnect', () => {
-		console.log('A user disconnected');
+		console.log('Webapp disconnected');
 	});
 });
 

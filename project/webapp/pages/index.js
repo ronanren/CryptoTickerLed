@@ -1,37 +1,38 @@
 import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
+import { Select } from '@chakra-ui/react'
+import { keyframes } from '@chakra-ui/react';
 
 const socket = io('http://localhost:3001');
 
 const Index = () => {
-	const [messages, setMessages] = useState([]);
-	const [newMessage, setNewMessage] = useState('');
+	const [newAction, setNewAction] = useState('');
 
-	useEffect(() => {
-		socket.on('chat message', (message) => {
-			setMessages((prevMessages) => [...prevMessages, message]);
-		});
-	}, []);
+	// useEffect(() => {
+	// 	socket.on('action', (action) => {
+	// 		setActions((prevActions) => [...prevActions, action]);
+	// 	});
+	// }, []);
 
-	const sendMessage = () => {
-		socket.emit('chat message', newMessage);
-		setNewMessage('');
+	const sendAction = () => {
+		socket.emit('action', newAction);
+		setNewAction('');
 	};
 
 	return (
 		<div>
-			<h1>Real-Time Chat</h1>
-			<div>
-				{messages.map((message, index) => (
-					<div key={index}>{message}</div>
-				))}
-			</div>
+			<h1>CryptoTickerLed</h1>
+			<Select placeholder='Select option'>
+				<option value='option1'>Option 1</option>
+				<option value='option2'>Option 2</option>
+				<option value='option3'>Option 3</option>
+			</Select>
 			<input
 				type="text"
-				value={newMessage}
-				onChange={(e) => setNewMessage(e.target.value)}
+				value={newAction}
+				onChange={(e) => setNewAction(e.target.value)}
 			/>
-			<button onClick={sendMessage}>Send</button>
+			<button onClick={sendAction}>Send action</button>
 		</div>
 	);
 };
