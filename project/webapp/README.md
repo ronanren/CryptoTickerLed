@@ -5,13 +5,13 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 First, run the websocket server:
 
 ```bash
-bun run server.js
+bun run server/server.js
 ```
 
-Second, run the development webapp:
+Second, run the webapp server:
 
 ```bash
 bun run dev
 ```
 
-webapp: [http://localhost:3000](http://localhost:3000)
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
