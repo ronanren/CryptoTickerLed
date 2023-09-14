@@ -1,0 +1,16 @@
+{
+  "displays": [
+    {
+      "type": "crypto",
+      "id": "bitcoin",
+      "symbol": "btc",
+      "interval": 5
+    },
+    {
+      "type": "crypto",
+      "id": "ethereum",
+      "symbol": "eth",
+      "interval": 5
+    }
+  ]
+}
