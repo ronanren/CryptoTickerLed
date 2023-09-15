@@ -53,6 +53,8 @@ I use the [CoinGecko API](https://www.coingecko.com/en/api/documentation) to get
 
 To run the web application (and the json server api), you need to run:
 ```bash
-cd app && bun run server.js & bun run start
+cd app 
+bun install
+bun run server.js & bun run start
 ```
 

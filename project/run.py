@@ -2,7 +2,7 @@
 # Display a runtext with double-buffering.
 from samplebase import SampleBase
 from rgbmatrix import graphics
-import time, random
+import time, random, os, json
 from coingecko_api import get_crypto_data
 
 class Run(SampleBase):
@@ -36,10 +36,20 @@ class Run(SampleBase):
         offscreen_canvas = self.matrix.CreateFrameCanvas()
         font = graphics.Font()
         font.LoadFont("fonts/6x12.bdf")
+        json_file_path = "app/public/config_displays.json"
 
-        ticker = "BTC"
-        percent = "+2.40%"
-        price = "$28679.85"
+        current_modification_time = os.path.getmtime(json_file_path)
+        last_modification_time = None
+
+        with open(json_file_path, 'r') as file:
+            json_data = json.load(file)
+            id_crypto = json_data['displays'][0]['id']
+            ticker = json_data['displays'][0]['symbol']
+
+        data = get_crypto_data(id_crypto, '1h')
+        percent = "{:.2f}".format(data['price_change_percentage_24h'])
+        if float(percent) > 0: percent = "+" + percent
+        price = "$" + str(data['current_price'])
 
         while True:
             offscreen_canvas.Clear()
@@ -49,15 +59,26 @@ class Run(SampleBase):
 
             size_price = graphics.DrawText(offscreen_canvas, font, 1, 16, self.whiteColor, price)
 
-            # graphic 
             for i in range(0, 64):
-                nbr = random.randint(17, 31)
+                nbr = 31 - data['chart'][i]
                 graphics.DrawLine(offscreen_canvas, i, 31, i, nbr, self.greenColor)
                 offscreen_canvas.SetPixel(i, nbr, self.HighGreenColor.red, self.HighGreenColor.green, self.HighGreenColor.blue)
 
+            current_modification_time = os.path.getmtime(json_file_path)
+            if current_modification_time != last_modification_time:
+                with open(json_file_path, 'r') as file:
+                    json_data = json.load(file)
+                    id_crypto = json_data['displays'][0]['id']
+                    ticker = json_data['displays'][0]['symbol']
+
+                data = get_crypto_data(id_crypto, '1h')
+                percent = "{:.2f}".format(data['price_change_percentage_24h'])
+                if float(percent) > 0: percent = "+" + percent
+                price = "$" + str(data['current_price'])
+                last_modification_time = current_modification_time
             
             offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas)
-            time.sleep(5)
+            time.sleep(1)
 
 if __name__ == "__main__":
     run = Run()

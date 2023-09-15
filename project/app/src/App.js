@@ -17,7 +17,7 @@ function App() {
   };
 
   const writeDisplaysJSON = (displays) => {
-    fetch('http://localhost:3001/write-json', {
+    fetch('http://192.168.1.18:3001/write-json', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

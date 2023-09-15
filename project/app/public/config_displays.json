@@ -2,20 +2,20 @@
   "displays": [
     {
       "type": "crypto",
-      "id": "BITCOIN",
-      "symbol": "",
+      "id": "ethereum",
+      "symbol": "eth",
+      "interval": 9
+    },
+    {
+      "type": "crypto",
+      "id": "elrond-erd-2",
+      "symbol": "EGLD",
       "interval": 5
     },
     {
       "type": "crypto",
-      "id": "ETHEREUM",
-      "symbol": "ETH",
-      "interval": 10
-    },
-    {
-      "type": "crypto",
-      "id": "",
-      "symbol": "",
+      "id": "bitcoin",
+      "symbol": "btc",
       "interval": 5
     }
   ]

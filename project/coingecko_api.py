@@ -55,11 +55,11 @@ def plot_candlestick(chart, max_height=15):
 
     for i, value in enumerate(chart):
       for j in range(max_height - value, max_height):
-          chart_console[j][i] = '█'
+          chart_console[j][i] = 'I'
 
     for row in chart_console:
         print(''.join(row))
    
-data = get_crypto_data("bitcoin", "1h")
-plot_candlestick(data["chart"])
-print(data)
+# data = get_crypto_data("bitcoin", "1h")
+# plot_candlestick(data["chart"])
+# print(data)
