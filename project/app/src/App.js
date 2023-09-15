@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { Flex, Heading } from '@chakra-ui/react'
 import DisplayForm from './components/displayForm';
 import DisplayItem from './components/displayItem';
+import Footer from './components/footer';
 
 function App() {
   const [displays, setDisplays] = useState([]);
@@ -62,8 +63,6 @@ function App() {
       <Flex
         flexDirection="column"
         alignItems="center"
-        height="100vh"
-        mb={5}
       >
         <Heading as="h1" my={4}>
           CryptoTickerLed
@@ -85,6 +84,7 @@ function App() {
             />
           ))
         )}
+        <Footer />
       </Flex>
     </ChakraProvider>
   )
