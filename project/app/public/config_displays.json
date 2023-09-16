@@ -8,12 +8,6 @@
     },
     {
       "type": "crypto",
-      "id": "elrond-erd-2",
-      "symbol": "EGLD",
-      "interval": 5
-    },
-    {
-      "type": "crypto",
       "id": "bitcoin",
       "symbol": "btc",
       "interval": 5

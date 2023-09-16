@@ -9,12 +9,19 @@ import Footer from './components/footer';
 
 function App() {
   const [displays, setDisplays] = useState([]);
+  const [coins, setCoins] = useState([]);
 
   const fetchDisplaysJSON = () => {
     fetch('config_displays.json')
       .then((res) => res.json())
       .then((data) => { setDisplays(data); });
   };
+
+  const fetchCoinsList = () => {
+    fetch('https://api.coingecko.com/api/v3/coins/list')
+      .then((res) => res.json())
+      .then((data) => { setCoins(data); });
+  }
 
   const writeDisplaysJSON = (displays) => {
     fetch('http://192.168.1.18:3001/write-json', {
@@ -28,7 +35,12 @@ function App() {
 
   useEffect(() => {
     fetchDisplaysJSON();
+    fetchCoinsList();
   }, []);
+
+  useEffect(() => {
+    console.log(coins);
+  }, [coins]);
 
   const handleAddDisplay = async (newDisplay) => {
     let newDisplays = { displays: [...displays.displays, newDisplay] };
