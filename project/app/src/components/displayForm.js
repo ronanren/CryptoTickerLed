@@ -20,7 +20,7 @@ import {
 	AutoCompleteList,
 } from "@choc-ui/chakra-autocomplete";
 
-const DisplayForm = ({ onAddDisplay }) => {
+const DisplayForm = ({ onAddDisplay, coins }) => {
 	const displayNull = { type: "crypto", id: "", symbol: "", interval: 5 };
 	const [display, setDisplay] = useState(displayNull);
 
@@ -53,45 +53,45 @@ const DisplayForm = ({ onAddDisplay }) => {
 							onChange={(e) => setDisplay({ ...display, id: e.target.value })}
 						/>
 					</FormControl>
-					<FormControl>
-						<FormLabel>Symbol</FormLabel>
-						<Input
-							type="text"
-							placeholder="Symbol"
-							value={display.symbol}
-							onChange={(e) => setDisplay({ ...display, symbol: e.target.value })}
-						/>
-					</FormControl>
-					<AutoComplete openOnFocus>
-					<AutoCompleteInput variant="filled" />
-					<AutoCompleteList>
-						{coins.map((coin, cid) => (
-						<AutoCompleteItem
-							key={`option-${cid}`}
-							value={coin}
-							textTransform="capitalize"
-						>
-							{coin}
-						</AutoCompleteItem>
-						))}
-					</AutoCompleteList>
-					</AutoComplete>
-					<FormControl>
-						<FormLabel>Interval</FormLabel>
-						<NumberInput
-							defaultValue={display.interval}
-							value={display.interval}
-							min={1}
-							clampValueOnBlur={false}
-							onChange={(e) => setDisplay({ ...display, interval: parseInt(e) })}
-						>
-							<NumberInputField />
-							<NumberInputStepper >
-								<NumberIncrementStepper />
-								<NumberDecrementStepper />
-							</NumberInputStepper>
-						</NumberInput>
-					</FormControl></>)}
+						<FormControl>
+							<FormLabel>Symbol</FormLabel>
+							<Input
+								type="text"
+								placeholder="Symbol"
+								value={display.symbol}
+								onChange={(e) => setDisplay({ ...display, symbol: e.target.value })}
+							/>
+						</FormControl>
+						<AutoComplete>
+							<AutoCompleteInput />
+							<AutoCompleteList>
+								{coins.map((coin) => (
+									<AutoCompleteItem
+										key={coin.id}
+										value={coin.id}
+										textTransform="capitalize"
+									>
+										{coin.name}
+									</AutoCompleteItem>
+								))}
+							</AutoCompleteList>
+						</AutoComplete>
+						<FormControl>
+							<FormLabel>Interval</FormLabel>
+							<NumberInput
+								defaultValue={display.interval}
+								value={display.interval}
+								min={1}
+								clampValueOnBlur={false}
+								onChange={(e) => setDisplay({ ...display, interval: parseInt(e) })}
+							>
+								<NumberInputField />
+								<NumberInputStepper >
+									<NumberIncrementStepper />
+									<NumberDecrementStepper />
+								</NumberInputStepper>
+							</NumberInput>
+						</FormControl></>)}
 				<Button colorScheme="teal" onClick={handleAddDisplay} mt={2}>
 					Add Display
 				</Button>

@@ -79,7 +79,7 @@ function App() {
         <Heading as="h1" my={4}>
           CryptoTickerLed
         </Heading>
-        <DisplayForm onAddDisplay={handleAddDisplay} />
+        <DisplayForm onAddDisplay={handleAddDisplay} coins={coins} />
         <Heading as="h4" fontSize={24} my={4}>
           Displays
         </Heading>
