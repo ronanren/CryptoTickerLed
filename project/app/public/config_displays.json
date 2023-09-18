@@ -5,6 +5,12 @@
       "id": "bitcoin",
       "symbol": "BTC",
       "name": "Bitcoin",
+      "granularity": "5m",
+      "interval": 3
+    },
+    {
+      "type": "text",
+      "text": "test",
       "interval": 5
     },
     {
@@ -12,7 +18,8 @@
       "id": "ethereum",
       "symbol": "ETH",
       "name": "Ethereum",
-      "interval": 10
+      "granularity": "5m",
+      "interval": 5
     }
   ]
 }

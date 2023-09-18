@@ -12,7 +12,7 @@ def get_crypto_data(ticker, interval="1h"):
     url = "https://api.coingecko.com/api/v3/coins/%s/market_chart?vs_currency=usd&days=" % ticker
     if interval == "1h":
       url += "3"
-    elif interval == "5min":
+    elif interval == "5m":
        url += "1"
     response = requests.get(url)
     data = response.json()
