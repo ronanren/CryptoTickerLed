@@ -2,15 +2,17 @@
   "displays": [
     {
       "type": "crypto",
-      "id": "ethereum",
-      "symbol": "eth",
-      "interval": 9
+      "id": "bitcoin",
+      "symbol": "BTC",
+      "name": "Bitcoin",
+      "interval": 5
     },
     {
       "type": "crypto",
-      "id": "bitcoin",
-      "symbol": "btc",
-      "interval": 5
+      "id": "ethereum",
+      "symbol": "ETH",
+      "name": "Ethereum",
+      "interval": 10
     }
   ]
 }

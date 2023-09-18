@@ -15,7 +15,7 @@ import {
 import { ReactSearchAutocomplete } from 'react-search-autocomplete';
 
 const DisplayForm = ({ onAddDisplay, coins }) => {
-	const displayNull = { type: "crypto", id: "", symbol: "", interval: 5 };
+	const displayNull = { type: "crypto", id: "", symbol: "", name: "", interval: 5 };
 	const [display, setDisplay] = useState(displayNull);
 
 	const handleAddDisplay = () => {
@@ -29,11 +29,11 @@ const DisplayForm = ({ onAddDisplay, coins }) => {
 	}
 
 	const handleOnSelect = (item) => {
-		setDisplay({ ...display, id: item.id, symbol: item.symbol });
+		setDisplay({ ...display, id: item.id, symbol: item.symbol.toUpperCase(), name: item.name });
 	}
 
 	const handleOnClear = () => {
-		setDisplay({ ...display, id: "", symbol: "" });
+		setDisplay({ ...display, id: "", symbol: "", name: "" });
 	}
 
 	return (
