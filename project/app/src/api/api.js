@@ -25,7 +25,10 @@ export const fetchCoinsList = (setCoins) => {
 
 
 export const writeDisplaysJSON = (displays) => {
-	fetch('http://localhost:3001/write-json', {
+	const serverDomain = window.location.hostname;
+	const port = 3001;
+	const apiUrl = `http://${serverDomain}:${port}/write-json`;
+	fetch(apiUrl, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'
