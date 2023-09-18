@@ -4,7 +4,6 @@
   "private": true,
   "dependencies": {
     "@chakra-ui/react": "^2.8.1",
-    "@choc-ui/chakra-autocomplete": "^5.2.5",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@testing-library/jest-dom": "^5.17.0",
@@ -17,6 +16,7 @@
     "react-icons": "^4.11.0",
     "react-nanny": "^2.15.0",
     "react-scripts": "5.0.1",
+    "react-search-autocomplete": "^8.5.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

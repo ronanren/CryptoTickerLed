@@ -6,41 +6,16 @@ import { Flex, Heading } from '@chakra-ui/react'
 import DisplayForm from './components/displayForm';
 import DisplayItem from './components/displayItem';
 import Footer from './components/footer';
+import { fetchDisplaysJSON, writeDisplaysJSON, fetchCoinsList } from './api/api';
 
 function App() {
   const [displays, setDisplays] = useState([]);
   const [coins, setCoins] = useState([]);
 
-  const fetchDisplaysJSON = () => {
-    fetch('config_displays.json')
-      .then((res) => res.json())
-      .then((data) => { setDisplays(data); });
-  };
-
-  const fetchCoinsList = () => {
-    fetch('https://api.coingecko.com/api/v3/coins/list')
-      .then((res) => res.json())
-      .then((data) => { setCoins(data); });
-  }
-
-  const writeDisplaysJSON = (displays) => {
-    fetch('http://192.168.1.18:3001/write-json', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(displays)
-    });
-  };
-
   useEffect(() => {
-    fetchDisplaysJSON();
-    fetchCoinsList();
+    fetchDisplaysJSON(setDisplays);
+    fetchCoinsList(setCoins);
   }, []);
-
-  useEffect(() => {
-    console.log(coins);
-  }, [coins]);
 
   const handleAddDisplay = async (newDisplay) => {
     let newDisplays = { displays: [...displays.displays, newDisplay] };

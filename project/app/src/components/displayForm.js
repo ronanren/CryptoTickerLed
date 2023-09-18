@@ -4,7 +4,6 @@ import {
 	Button,
 	FormControl,
 	FormLabel,
-	Input,
 	VStack,
 	Select,
 	NumberInput,
@@ -13,12 +12,7 @@ import {
 	NumberIncrementStepper,
 	NumberDecrementStepper,
 } from "@chakra-ui/react";
-import {
-	AutoComplete,
-	AutoCompleteInput,
-	AutoCompleteItem,
-	AutoCompleteList,
-} from "@choc-ui/chakra-autocomplete";
+import { ReactSearchAutocomplete } from 'react-search-autocomplete';
 
 const DisplayForm = ({ onAddDisplay, coins }) => {
 	const displayNull = { type: "crypto", id: "", symbol: "", interval: 5 };
@@ -26,8 +20,21 @@ const DisplayForm = ({ onAddDisplay, coins }) => {
 
 	const handleAddDisplay = () => {
 		onAddDisplay(display);
-		setDisplay(displayNull);
 	};
+
+	const formatResult = (item) => {
+		return (
+			<span style={{ display: 'block', textAlign: 'left' }}>{item.name} ({item.symbol})</span>
+		)
+	}
+
+	const handleOnSelect = (item) => {
+		setDisplay({ ...display, id: item.id, symbol: item.symbol });
+	}
+
+	const handleOnClear = () => {
+		setDisplay({ ...display, id: "", symbol: "" });
+	}
 
 	return (
 		<Box>
@@ -44,38 +51,27 @@ const DisplayForm = ({ onAddDisplay, coins }) => {
 					</Select>
 				</FormControl>
 				{display.type === "crypto" && (
-					<><FormControl>
-						<FormLabel>ID</FormLabel>
-						<Input
-							type="text"
-							placeholder="ID"
-							value={display.id}
-							onChange={(e) => setDisplay({ ...display, id: e.target.value })}
-						/>
-					</FormControl>
+					<>
 						<FormControl>
-							<FormLabel>Symbol</FormLabel>
-							<Input
-								type="text"
-								placeholder="Symbol"
-								value={display.symbol}
-								onChange={(e) => setDisplay({ ...display, symbol: e.target.value })}
-							/>
+							<FormLabel>Crypto</FormLabel>
+							<div style={{ width: 400 }}>
+								<ReactSearchAutocomplete
+									items={coins}
+									autoFocus
+									formatResult={formatResult}
+									placeholder="Search Crypto"
+									maxResults={10}
+									onSelect={handleOnSelect}
+									onClear={handleOnClear}
+									styling={{
+										zIndex: 1,
+										border: '1px solid #E2E8F0',
+										borderRadius: '0.375rem',
+										boxShadow: 'none',
+									}}
+								/>
+							</div>
 						</FormControl>
-						<AutoComplete>
-							<AutoCompleteInput />
-							<AutoCompleteList>
-								{coins.map((coin) => (
-									<AutoCompleteItem
-										key={coin.id}
-										value={coin.id}
-										textTransform="capitalize"
-									>
-										{coin.name}
-									</AutoCompleteItem>
-								))}
-							</AutoCompleteList>
-						</AutoComplete>
 						<FormControl>
 							<FormLabel>Interval</FormLabel>
 							<NumberInput
@@ -92,7 +88,7 @@ const DisplayForm = ({ onAddDisplay, coins }) => {
 								</NumberInputStepper>
 							</NumberInput>
 						</FormControl></>)}
-				<Button colorScheme="teal" onClick={handleAddDisplay} mt={2}>
+				<Button colorScheme="teal" onClick={handleAddDisplay} mt={2} isDisabled={display.id === ""}>
 					Add Display
 				</Button>
 			</VStack>
