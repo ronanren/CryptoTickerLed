@@ -2,7 +2,7 @@ import './App.css';
 import * as React from 'react'
 import { ChakraProvider } from '@chakra-ui/react'
 import { useState, useEffect } from 'react';
-import { Flex, Heading } from '@chakra-ui/react'
+import { Flex, Heading, Center, Tabs, Tab, TabPanels, TabPanel, TabList } from '@chakra-ui/react'
 import DisplayForm from './components/displayForm';
 import DisplayItem from './components/displayItem';
 import Footer from './components/footer';
@@ -54,7 +54,23 @@ function App() {
         <Heading as="h1" my={4}>
           CryptoTickerLed
         </Heading>
-        <DisplayForm onAddDisplay={handleAddDisplay} coins={coins} />
+        <Tabs variant='soft-rounded'>
+          <Center>
+            <TabList>
+              <Tab>Add display</Tab>
+              <Tab>Settings</Tab>
+            </TabList>
+          </Center>
+          <TabPanels>
+            <TabPanel>
+              <DisplayForm onAddDisplay={handleAddDisplay} coins={coins} />
+            </TabPanel>
+            <TabPanel>
+              <p>Settings!!</p>
+            </TabPanel>
+          </TabPanels>
+        </Tabs>
+
         <Heading as="h4" fontSize={24} my={4}>
           Displays
         </Heading>

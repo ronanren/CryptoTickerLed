@@ -24,7 +24,7 @@ const DisplayForm = ({ onAddDisplay, coins }) => {
 
 	const formatResult = (item) => {
 		return (
-			<span style={{ display: 'block', textAlign: 'left' }}>{item.name} ({item.symbol})</span>
+			<span style={{ display: 'block', textAlign: 'left' }}>{item.name} (<span style={{ textTransform: "uppercase" }}>{item.symbol}</span>)</span>
 		)
 	}
 
@@ -88,7 +88,7 @@ const DisplayForm = ({ onAddDisplay, coins }) => {
 								</NumberInputStepper>
 							</NumberInput>
 						</FormControl></>)}
-				<Button colorScheme="teal" onClick={handleAddDisplay} mt={2} isDisabled={display.id === ""}>
+				<Button colorScheme='blue' onClick={handleAddDisplay} mt={2} isDisabled={display.id === ""}>
 					Add Display
 				</Button>
 			</VStack>
