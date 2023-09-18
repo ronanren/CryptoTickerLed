@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# Display a runtext with double-buffering.
 from samplebase import SampleBase
 from rgbmatrix import graphics
 import time, random, os, json
@@ -13,7 +12,7 @@ class Run(SampleBase):
         self.greenColor = graphics.Color(0, 128, 0)
         self.HighGreenColor = graphics.Color(0, 250, 100)
 
-    def get_position_right(self, size_canvas,text):
+    def get_position_right(self, size_canvas, text):
         position = size_canvas
         for character in text:
             if character == '.':
@@ -26,9 +25,9 @@ class Run(SampleBase):
 
     def get_color_for_percent(self, percent):
         if percent.startswith("+"):
-            return self.greenColor  
+            return self.greenColor
         elif percent.startswith("-"):
-            return self.redColor 
+            return self.redColor
         else:
             return self.whiteColor
 
@@ -38,22 +37,26 @@ class Run(SampleBase):
         font.LoadFont("fonts/6x12.bdf")
         json_file_path = "app/public/config_displays.json"
 
-        current_modification_time = os.path.getmtime(json_file_path)
         last_modification_time = None
-
-        with open(json_file_path, 'r') as file:
-            json_data = json.load(file)
-            id_crypto = json_data['displays'][0]['id']
-            ticker = json_data['displays'][0]['symbol']
-
-        data = get_crypto_data(id_crypto, '1h')
-        percent = "{:.2f}".format(data['price_change_percentage_24h'])
-        if float(percent) > 0: percent = "+" + percent
-        price = "$" + str(data['current_price'])
 
         while True:
             offscreen_canvas.Clear()
 
+            # Fetch data if needed
+            current_modification_time = os.path.getmtime(json_file_path)
+            if current_modification_time != last_modification_time:
+                with open(json_file_path, 'r') as file:
+                    json_data = json.load(file)
+                    id_crypto = json_data['displays'][0]['id']
+                    ticker = json_data['displays'][0]['symbol']
+
+                data = get_crypto_data(id_crypto, '1h')
+                percent = "{:.2f}".format(data['price_change_percentage_24h'])
+                if float(percent) > 0: percent = "+" + percent + "%"
+                price = "$" + str(data['current_price'])
+                last_modification_time = current_modification_time
+
+            # Show data on led matrix
             size_ticker = graphics.DrawText(offscreen_canvas, font, 1, 8, self.whiteColor, ticker)
             size_percent = graphics.DrawText(offscreen_canvas, font, self.get_position_right(offscreen_canvas.width, percent), 8, self.get_color_for_percent(percent), percent)
 
@@ -64,19 +67,6 @@ class Run(SampleBase):
                 graphics.DrawLine(offscreen_canvas, i, 31, i, nbr, self.greenColor)
                 offscreen_canvas.SetPixel(i, nbr, self.HighGreenColor.red, self.HighGreenColor.green, self.HighGreenColor.blue)
 
-            current_modification_time = os.path.getmtime(json_file_path)
-            if current_modification_time != last_modification_time:
-                with open(json_file_path, 'r') as file:
-                    json_data = json.load(file)
-                    id_crypto = json_data['displays'][0]['id']
-                    ticker = json_data['displays'][0]['symbol']
-
-                data = get_crypto_data(id_crypto, '1h')
-                percent = "{:.2f}".format(data['price_change_percentage_24h'])
-                if float(percent) > 0: percent = "+" + percent
-                price = "$" + str(data['current_price'])
-                last_modification_time = current_modification_time
-            
             offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas)
             time.sleep(1)
 
