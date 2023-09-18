@@ -3,7 +3,7 @@ import { Button, Flex, Text } from '@chakra-ui/react';
 import { FaArrowUp, FaArrowDown } from 'react-icons/fa';
 
 const DisplayItem = ({ data, index, length, onMoveUp, onMoveDown, onDelete }) => {
-	const { type, id, symbol, interval } = data;
+	const { type, symbol, name, interval } = data;
 
 	return (
 		<Flex
@@ -25,9 +25,9 @@ const DisplayItem = ({ data, index, length, onMoveUp, onMoveDown, onDelete }) =>
 
 				<Flex flexDirection="row">
 					<Text fontWeight="bold">
-						ID:&nbsp;
+						Name:&nbsp;
 					</Text>
-					<Text>{id}</Text>
+					<Text>{name}</Text>
 				</Flex>
 
 				<Flex flexDirection="row">
