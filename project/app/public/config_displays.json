@@ -1,25 +1,17 @@
 {
   "displays": [
     {
+      "type": "text",
+      "text": "test",
+      "interval": 10
+    },
+    {
       "type": "crypto",
       "id": "bitcoin",
       "symbol": "BTC",
       "name": "Bitcoin",
       "granularity": "5m",
-      "interval": 3
-    },
-    {
-      "type": "text",
-      "text": "test",
-      "interval": 5
-    },
-    {
-      "type": "crypto",
-      "id": "ethereum",
-      "symbol": "ETH",
-      "name": "Ethereum",
-      "granularity": "5m",
-      "interval": 5
+      "interval": 10
     }
   ]
 }

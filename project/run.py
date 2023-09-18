@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 from samplebase import SampleBase
 from rgbmatrix import graphics
-import time, random, os, json
+import time, random, os, json, socket
 from coingecko_api import get_crypto_data
 
 class Run(SampleBase):
@@ -87,11 +87,16 @@ class Run(SampleBase):
         with open(self.json_file_path, 'r') as file:
             json_data = json.load(file)
             text = json_data['displays'][display]['text']
-        return text
+        
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        s.settimeout(0.1)
+        s.connect(('10.255.255.255', 1))
+        local_ip = s.getsockname()[0]
+        return local_ip
 
     def show_text_data(self, offscreen_canvas, text):
         offscreen_canvas.Clear()
-        size_text = graphics.DrawText(offscreen_canvas, self.font, self.get_position_right(offscreen_canvas.width, text) - 16, 16, self.blue, text)
+        size_text = graphics.DrawText(offscreen_canvas, self.font, self.get_position_right(offscreen_canvas.width, text), 16, self.blue, text)
         self.matrix.SwapOnVSync(offscreen_canvas)
 
     def run(self):
