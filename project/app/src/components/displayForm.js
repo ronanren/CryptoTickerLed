@@ -15,7 +15,7 @@ import {
 import { ReactSearchAutocomplete } from 'react-search-autocomplete';
 
 const DisplayForm = ({ onAddDisplay, coins }) => {
-	const displayNull = { type: "crypto", id: "", symbol: "", name: "", interval: 5 };
+	const displayNull = { type: "crypto", id: "", symbol: "", name: "", interval: 5, granularity: "1h" };
 	const [display, setDisplay] = useState(displayNull);
 
 	const handleAddDisplay = () => {
@@ -71,6 +71,16 @@ const DisplayForm = ({ onAddDisplay, coins }) => {
 									}}
 								/>
 							</div>
+						</FormControl>
+						<FormControl>
+							<FormLabel>Granularity</FormLabel>
+							<Select
+								value={display.granularity}
+								onChange={(e) => setDisplay({ ...display, granularity: e.target.value })}
+							>
+								<option value="5m">5 minutes</option>
+								<option value="1h">1 hour</option>
+							</Select>
 						</FormControl>
 						<FormControl>
 							<FormLabel>Interval</FormLabel>
