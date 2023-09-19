@@ -58,3 +58,14 @@ bun install
 bun run server.js & bun run start
 ```
 
+## Run on startup
+
+In order to run the web application and the script for the led matrix, run ```crontab -e``` and add this line:
+
+```bash
+@reboot sleep 10 && cd /root/CryptoTickerLed/project/ && ./run.py --led-gpio-mapping=adafruit-hat --led-rows=32 --led-cols=64 --led-slowdown-gpio=2 
+@reboot sleep 20 && cd /root/CryptoTickerLed/project/app && bun run server.js
+@reboot sleep 20 && cd /root/CryptoTickerLed/project/app && bun run start
+```
+
+
