@@ -3,15 +3,15 @@
     {
       "type": "text",
       "text": "test",
-      "interval": 10
+      "interval": 2
     },
     {
       "type": "crypto",
-      "id": "bitcoin",
-      "symbol": "BTC",
-      "name": "Bitcoin",
-      "granularity": "5m",
-      "interval": 10
+      "id": "ethereum",
+      "symbol": "ETH",
+      "name": "Ethereum",
+      "interval": 20,
+      "granularity": "1h"
     }
   ]
 }

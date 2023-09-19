@@ -37,12 +37,15 @@ class Run(SampleBase):
             return self.whiteColor
 
     def fetch_type_display(self, display):
-        with open(self.json_file_path, 'r') as file:
-            json_data = json.load(file)
-            type_display = json_data['displays'][display]['type']
-            interval = json_data['displays'][display]['interval']
-            displays = len(json_data['displays'])
-        return type_display, interval, displays
+        try:
+            with open(self.json_file_path, 'r') as file:
+                json_data = json.load(file)
+                type_display = json_data['displays'][display]['type']
+                interval = json_data['displays'][display]['interval']
+                displays = len(json_data['displays'])
+            return type_display, interval, displays
+        except: 
+            return None, 10, 1
 
     def show_type_of_display(self, offscreen_canvas, type_display, display):
         if type_display == "crypto":
@@ -51,6 +54,8 @@ class Run(SampleBase):
         if type_display == "text":
             text = self.fetch_text_data(display)
             self.show_text_data(offscreen_canvas, text)
+        if type_display == None:
+            self.show_text_data(offscreen_canvas, "")
 
     def fetch_crypto_data(self, display):
         with open(self.json_file_path, 'r') as file:
@@ -64,7 +69,8 @@ class Run(SampleBase):
 
         data = get_crypto_data(id_crypto, granularity)
         percent = "{:.2f}".format(data['price_change_percentage_24h'])
-        if float(percent) > 0: percent = "+" + percent + "%"
+        if float(percent) > 0: percent = "+" + percent
+        percent += "%"
         price = "$" + str(data['current_price'])
         return ticker, granularity, price, percent, data['chart']
 
@@ -111,6 +117,7 @@ class Run(SampleBase):
         while True:
             current_modification_time = os.path.getmtime(self.json_file_path)
             if current_modification_time != last_modification_time:
+                display = 0
                 type_display, interval, displays = self.fetch_type_display(display)
                 self.show_type_of_display(offscreen_canvas, type_display, display)
                 last_modification_time = current_modification_time
