@@ -60,7 +60,14 @@ bun run server.js & bun run start
 
 ## Run on startup
 
-In order to run the web application and the script for the led matrix, run ```crontab -e``` and add this line:
+In order to run the web application and the script for the led matrix, build the app and install serve:
+
+```bash
+npm run build
+npm install -g serve
+```
+
+After, run ```crontab -e``` and add this line:
 
 ```bash
 @reboot sleep 20 && /root/CryptoTickerLed/project/run.sh

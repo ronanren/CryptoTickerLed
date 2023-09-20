@@ -9,5 +9,5 @@ cd /root/CryptoTickerLed/project/ && ./run.py --led-gpio-mapping=adafruit-hat --
 # Move to the app directory and run server.js and start scripts
 cd /root/CryptoTickerLed/project/app
 /root/.bun/bin/bun run server.js & >> /root/server.log 2>> /root/server_error.log &
-/root/.nvm/versions/node/v20.6.1/bin/npm run start & >> /root/start.log 2>> /root/start_error.log &
+serve -s build & >> /root/start.log 2>> /root/start_error.log &
 
