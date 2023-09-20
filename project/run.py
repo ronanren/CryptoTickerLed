@@ -44,8 +44,8 @@ class Run(SampleBase):
                 interval = json_data['displays'][display]['interval']
                 displays = len(json_data['displays'])
 
-		# settings
-		brightness = json_data['settings']['brightness']
+		    # settings
+            brightness = json_data['settings']['brightness']
             self.matrix.brightness = brightness
             print(brightness)
             return type_display, interval, displays
@@ -100,7 +100,7 @@ class Run(SampleBase):
         offscreen_canvas.Clear()
         graphics.DrawText(offscreen_canvas, self.font, self.get_position_right(offscreen_canvas.width, ip), 16, self.blue, ip)
         graphics.DrawText(offscreen_canvas, self.font, self.get_position_right(offscreen_canvas.width, ":3000"), 26, self.blue, ":3000")
-	self.matrix.SwapOnVSync(offscreen_canvas)
+        self.matrix.SwapOnVSync(offscreen_canvas)
 
     def run(self):
         offscreen_canvas = self.matrix.CreateFrameCanvas()

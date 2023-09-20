@@ -7,42 +7,49 @@ import DisplayForm from './components/displayForm';
 import DisplayItem from './components/displayItem';
 import Footer from './components/footer';
 import { fetchDisplaysJSON, writeDisplaysJSON, fetchCoinsList } from './api/api';
+import SettingsForm from './components/settingsForm';
 
 function App() {
   const [displays, setDisplays] = useState([]);
+  const [settings, setSettings] = useState([]);
   const [coins, setCoins] = useState([]);
 
   useEffect(() => {
-    fetchDisplaysJSON(setDisplays);
+    fetchDisplaysJSON(setDisplays, setSettings);
     fetchCoinsList(setCoins);
   }, []);
 
+  const handleUpdateSettings = (newSettings) => {
+    setSettings(newSettings);
+    writeDisplaysJSON(displays, newSettings);
+  }
+
   const handleAddDisplay = async (newDisplay) => {
-    let newDisplays = { displays: [...displays.displays, newDisplay] };
+    let newDisplays = [...displays, newDisplay];
     setDisplays(newDisplays);
-    writeDisplaysJSON(newDisplays);
+    writeDisplaysJSON(newDisplays, settings);
   };
 
   const handleMoveUp = (index) => {
     if (index > 0) {
-      let newDisplays = { displays: displays.displays.map((display, i) => i === index - 1 ? displays.displays[index] : i === index ? displays.displays[index - 1] : display) };
+      let newDisplays = displays.map((display, i) => i === index - 1 ? displays[index] : i === index ? displays[index - 1] : display);
       setDisplays(newDisplays);
-      writeDisplaysJSON(newDisplays);
+      writeDisplaysJSON(newDisplays, settings);
     }
   };
 
   const handleMoveDown = (index) => {
-    if (index < displays.displays.length - 1) {
-      let newDisplays = { displays: displays.displays.map((display, i) => i === index ? displays.displays[index + 1] : i === index + 1 ? displays.displays[index] : display) };
+    if (index < displays.length - 1) {
+      let newDisplays = displays.map((display, i) => i === index ? displays[index + 1] : i === index + 1 ? displays[index] : display);
       setDisplays(newDisplays);
-      writeDisplaysJSON(newDisplays);
+      writeDisplaysJSON(newDisplays, settings);
     }
   };
 
   const handleDelete = (index) => {
-    let newDisplays = { displays: displays.displays.filter((display, i) => i !== index) };
+    let newDisplays = displays.filter((display, i) => i !== index);
     setDisplays(newDisplays);
-    writeDisplaysJSON(newDisplays);
+    writeDisplaysJSON(newDisplays, settings);
   };
 
   return (
@@ -54,7 +61,7 @@ function App() {
         <Heading as="h1" my={4}>
           CryptoTickerLed
         </Heading>
-        <Tabs variant='soft-rounded'>
+        <Tabs variant='soft-rounded' isLazy>
           <Center>
             <TabList>
               <Tab>Add display</Tab>
@@ -66,7 +73,7 @@ function App() {
               <DisplayForm onAddDisplay={handleAddDisplay} coins={coins} />
             </TabPanel>
             <TabPanel>
-              <p>Settings!!</p>
+              <SettingsForm onUpdateSettings={handleUpdateSettings} settingsData={settings} />
             </TabPanel>
           </TabPanels>
         </Tabs>
@@ -74,13 +81,13 @@ function App() {
         <Heading as="h4" fontSize={24} my={4}>
           Displays
         </Heading>
-        {displays.displays && (
-          displays.displays.map((display, index) => (
+        {displays && (
+          displays.map((display, index) => (
             <DisplayItem
               key={index}
               data={display}
               index={index}
-              length={displays.displays.length}
+              length={displays.length}
               onMoveUp={handleMoveUp}
               onMoveDown={handleMoveDown}
               onDelete={handleDelete}

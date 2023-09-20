@@ -1,7 +1,10 @@
-export const fetchDisplaysJSON = (setDisplays) => {
+export const fetchDisplaysJSON = (setDisplays, setSettings) => {
 	fetch('config_displays.json')
 		.then((res) => res.json())
-		.then((data) => { setDisplays(data); });
+		.then((data) => {
+			setDisplays(data.displays);
+			setSettings(data.settings);
+		});
 };
 
 export const fetchCoinsList = (setCoins) => {
@@ -24,7 +27,7 @@ export const fetchCoinsList = (setCoins) => {
 };
 
 
-export const writeDisplaysJSON = (displays) => {
+export const writeDisplaysJSON = (displays, settings) => {
 	const serverDomain = window.location.hostname;
 	const port = 3001;
 	const apiUrl = `http://${serverDomain}:${port}/write-json`;
@@ -33,6 +36,6 @@ export const writeDisplaysJSON = (displays) => {
 		headers: {
 			'Content-Type': 'application/json'
 		},
-		body: JSON.stringify(displays)
+		body: JSON.stringify({ displays, settings })
 	});
 };
