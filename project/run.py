@@ -51,18 +51,13 @@ class Run(SampleBase):
         if type_display == "crypto":
             ticker, granularity, price, percent, chart = self.fetch_crypto_data(display)
             self.show_crypto_data(offscreen_canvas, ticker, granularity, price, percent, chart)
-        if type_display == "text":
-            text = self.fetch_text_data(display)
-            self.show_text_data(offscreen_canvas, text)
         if type_display == None:
-            self.show_text_data(offscreen_canvas, "")
+            ip = self.fetch_ip_data()
+            self.show_ip_data(offscreen_canvas, ip)
 
     def fetch_crypto_data(self, display):
         with open(self.json_file_path, 'r') as file:
             json_data = json.load(file)
-            displays = len(json_data['displays'])
-            interval = json_data['displays'][display]['interval']
-
             id_crypto = json_data['displays'][display]['id']
             ticker = json_data['displays'][display]['symbol']
             granularity = json_data['displays'][display]['granularity']
@@ -76,11 +71,11 @@ class Run(SampleBase):
 
     def show_crypto_data(self, offscreen_canvas, ticker, granularity, price, percent, chart):
         offscreen_canvas.Clear()
-        size_ticker = graphics.DrawText(offscreen_canvas, self.font, 1, 8, self.whiteColor, ticker)
-        size_percent = graphics.DrawText(offscreen_canvas, self.font, self.get_position_right(offscreen_canvas.width, percent), 8, self.get_color_for_percent(percent), percent)
+        graphics.DrawText(offscreen_canvas, self.font, 1, 8, self.whiteColor, ticker)
+        graphics.DrawText(offscreen_canvas, self.font, self.get_position_right(offscreen_canvas.width, percent), 8, self.get_color_for_percent(percent), percent)
 
-        size_price = graphics.DrawText(offscreen_canvas, self.font, 1, 16, self.whiteColor, price)
-        size_granularity = graphics.DrawText(offscreen_canvas, self.font, self.get_position_right(offscreen_canvas.width, granularity), 16, self.blue, granularity)
+        graphics.DrawText(offscreen_canvas, self.font, 1, 16, self.whiteColor, price)
+        graphics.DrawText(offscreen_canvas, self.font, self.get_position_right(offscreen_canvas.width, granularity), 16, self.blue, granularity)
 
         for i in range(0, 64):
             nbr = 31 - chart[i]
@@ -89,20 +84,16 @@ class Run(SampleBase):
 
         self.matrix.SwapOnVSync(offscreen_canvas)
 
-    def fetch_text_data(self, display):
-        with open(self.json_file_path, 'r') as file:
-            json_data = json.load(file)
-            text = json_data['displays'][display]['text']
-        
+    def fetch_ip_data(self):
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         s.settimeout(0.1)
         s.connect(('10.255.255.255', 1))
         local_ip = s.getsockname()[0]
         return local_ip
 
-    def show_text_data(self, offscreen_canvas, text):
+    def show_ip_data(self, offscreen_canvas, ip):
         offscreen_canvas.Clear()
-        size_text = graphics.DrawText(offscreen_canvas, self.font, self.get_position_right(offscreen_canvas.width, text), 16, self.blue, text)
+        graphics.DrawText(offscreen_canvas, self.font, self.get_position_right(offscreen_canvas.width, ip), 16, self.blue, ip)
         self.matrix.SwapOnVSync(offscreen_canvas)
 
     def run(self):
