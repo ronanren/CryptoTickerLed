@@ -1,17 +1,15 @@
 {
   "displays": [
-    {
-      "type": "text",
-      "text": "test",
-      "interval": 2
-    },
-    {
+	{
       "type": "crypto",
       "id": "ethereum",
       "symbol": "ETH",
       "name": "Ethereum",
-      "interval": 20,
+      "interval": 30,
       "granularity": "1h"
-    }
-  ]
+    }    
+  ],
+  "settings": {
+    "brightness": 50
+  }
 }

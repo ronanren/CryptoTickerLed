@@ -16,7 +16,7 @@ class Run(SampleBase):
         self.blue = graphics.Color(53, 0, 245)
 
         self.json_file_path = "app/public/config_displays.json"
-        
+
     def get_position_right(self, size_canvas, text):
         position = size_canvas
         for character in text:
@@ -43,8 +43,13 @@ class Run(SampleBase):
                 type_display = json_data['displays'][display]['type']
                 interval = json_data['displays'][display]['interval']
                 displays = len(json_data['displays'])
+
+		# settings
+		brightness = json_data['settings']['brightness']
+            self.matrix.brightness = brightness
+            print(brightness)
             return type_display, interval, displays
-        except: 
+        except:
             return None, 10, 1
 
     def show_type_of_display(self, offscreen_canvas, type_display, display):
@@ -75,7 +80,7 @@ class Run(SampleBase):
         graphics.DrawText(offscreen_canvas, self.font, self.get_position_right(offscreen_canvas.width, percent), 8, self.get_color_for_percent(percent), percent)
 
         graphics.DrawText(offscreen_canvas, self.font, 1, 16, self.whiteColor, price)
-        graphics.DrawText(offscreen_canvas, self.font, self.get_position_right(offscreen_canvas.width, granularity), 16, self.blue, granularity)
+        graphics.DrawText(offscreen_canvas, self.font, self.get_position_right(offscreen_canvas.width, granularity), 16, self.get_color_for_percent(percent), granularity)
 
         for i in range(0, 64):
             nbr = 31 - chart[i]
@@ -94,7 +99,8 @@ class Run(SampleBase):
     def show_ip_data(self, offscreen_canvas, ip):
         offscreen_canvas.Clear()
         graphics.DrawText(offscreen_canvas, self.font, self.get_position_right(offscreen_canvas.width, ip), 16, self.blue, ip)
-        self.matrix.SwapOnVSync(offscreen_canvas)
+        graphics.DrawText(offscreen_canvas, self.font, self.get_position_right(offscreen_canvas.width, ":3000"), 26, self.blue, ":3000")
+	self.matrix.SwapOnVSync(offscreen_canvas)
 
     def run(self):
         offscreen_canvas = self.matrix.CreateFrameCanvas()
@@ -117,7 +123,7 @@ class Run(SampleBase):
                 type_display, interval, displays = self.fetch_type_display(display)
                 self.show_type_of_display(offscreen_canvas, type_display, display)
                 last_display_update = time.time()
-            
+
             time.sleep(1)
 
 if __name__ == "__main__":
