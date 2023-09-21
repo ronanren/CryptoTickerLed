@@ -12,8 +12,9 @@ const DisplayItem = ({ data, index, length, onMoveUp, onMoveDown, onDelete }) =>
 			p={3}
 			border="1px solid #ccc"
 			borderRadius="md"
-			mb={3}
-			width={380}
+			mb={4}
+			width="90vw"
+			maxWidth="400px"
 		>
 			<Flex flexDirection="column" alignItems="flex-start" mx={8}>
 				<Flex flexDirection="row">

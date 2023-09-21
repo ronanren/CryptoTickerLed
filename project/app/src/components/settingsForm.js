@@ -8,13 +8,15 @@ import {
 	Slider,
 	SliderTrack,
 	SliderFilledTrack,
-	SliderThumb
+	SliderThumb,
+	Tooltip,
 } from "@chakra-ui/react";
 
 const SettingsForm = ({ onUpdateSettings, settingsData }) => {
 	const settingsNull = { brightness: 0 };
 	const [settings, setSettings] = useState(settingsNull);
 	const [brightness, setBrightness] = useState(settingsData.brightness);
+	const [showTooltipBrightness, setShowTooltipBrightness] = React.useState(false)
 
 	const handleUpdateSettings = () => {
 		onUpdateSettings(settings);
@@ -29,13 +31,30 @@ const SettingsForm = ({ onUpdateSettings, settingsData }) => {
 		<Box>
 			<VStack spacing={1}>
 				<FormControl>
-					<FormLabel>Brightness {brightness}%</FormLabel>
-					<Slider defaultValue={brightness} min={0} max={100} step={5} onChange={(val) => handleBrightnessChange(val)}>
-						<SliderTrack bg='red.100'>
-							<Box position='relative' right={10} />
-							<SliderFilledTrack bg='#3182ce' />
+					<FormLabel>Brightness</FormLabel>
+					<Slider
+						id='slider'
+						defaultValue={brightness}
+						min={20}
+						max={100}
+						step={5}
+						onChange={(v) => handleBrightnessChange(v)}
+						onMouseEnter={() => setShowTooltipBrightness(true)}
+						onMouseLeave={() => setShowTooltipBrightness(false)}
+					>
+						<SliderTrack>
+							<SliderFilledTrack bg="#3182ce" />
 						</SliderTrack>
-						<SliderThumb boxSize={6} />
+						<Tooltip
+							hasArrow
+							bg='#3182ce'
+							color='white'
+							placement='top'
+							isOpen={showTooltipBrightness}
+							label={`${brightness}%`}
+						>
+							<SliderThumb />
+						</Tooltip>
 					</Slider>
 				</FormControl>
 				<Button colorScheme='blue' onClick={handleUpdateSettings} mt={2}>

@@ -4,9 +4,7 @@ Crypto ticker led to show current price of cryptocurrencies on matrix led.
 The main objective of this project is to reproduce this project selling on 
 [Etsy](https://www.etsy.com/listing/1255228529/crypto-ticker-stocks-forex-live-price?ga_order=highest_reviews&ga_search_type=all&ga_view_type=gallery&ga_search_query=crypto+ticker&ref=sc_gallery-1-3&sts=1&plkey=7e51c8858f5ecf6c050067d96408ab1e714a4001%3A1255228529) for almost 200$.
 
-Example of the Etsy product:
-
-<img src="https://github.com/ronanren/CryptoTickerLed/blob/main/img/EtsyProduct.png?raw=true" width="400">
+Example of my result: asap
 
 ## Hardware
 
@@ -41,7 +39,7 @@ sudo make install-python
 
 Thanks to these Python bindings, I was able to create this project: https://github.com/hzeller/rpi-rgb-led-matrix/tree/master/bindings/python
 
-Test:
+Test the matrix led:
 ```bash
 cd project
 sudo ./run.py --led-gpio-mapping=adafruit-hat --led-rows=32 --led-cols=64 --led-slowdown-gpio=2
@@ -53,7 +51,7 @@ I use the [CoinGecko API](https://www.coingecko.com/en/api/documentation) to get
 
 To run the web application (and the json server api), you need to run:
 ```bash
-cd app 
+cd project/app 
 bun install
 bun run server.js & bun run start
 ```
@@ -72,5 +70,3 @@ After, run ```crontab -e``` and add this line:
 ```bash
 @reboot sleep 20 && /root/CryptoTickerLed/project/run.sh
 ```
-
-

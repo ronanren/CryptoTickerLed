@@ -57,6 +57,7 @@ function App() {
       <Flex
         flexDirection="column"
         alignItems="center"
+        justifyContent="center"
       >
         <Heading as="h1" my={4}>
           CryptoTickerLed
@@ -78,22 +79,25 @@ function App() {
           </TabPanels>
         </Tabs>
 
-        <Heading as="h4" fontSize={24} my={4}>
+        <Heading as="h4" fontSize={24} mb={5}>
           Displays
         </Heading>
-        {displays && (
-          displays.map((display, index) => (
-            <DisplayItem
-              key={index}
-              data={display}
-              index={index}
-              length={displays.length}
-              onMoveUp={handleMoveUp}
-              onMoveDown={handleMoveDown}
-              onDelete={handleDelete}
-            />
-          ))
-        )}
+        <Flex alignItems='center' justifyContent='center' flexDirection="column">
+          {displays && (
+            displays.map((display, index) => (
+              <DisplayItem
+                key={index}
+                data={display}
+                index={index}
+                length={displays.length}
+                onMoveUp={handleMoveUp}
+                onMoveDown={handleMoveDown}
+                onDelete={handleDelete}
+              />
+            ))
+          )}
+        </Flex>
+
         <Footer />
       </Flex>
     </ChakraProvider>
