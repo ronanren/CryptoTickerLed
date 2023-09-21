@@ -5,7 +5,7 @@
       "id": "bitcoin",
       "symbol": "BTC",
       "name": "Bitcoin",
-      "interval": 5,
+      "interval": 30,
       "granularity": "1h"
     },
     {
@@ -14,14 +14,6 @@
       "symbol": "ETH",
       "name": "Ethereum",
       "interval": 30,
-      "granularity": "1h"
-    },
-    {
-      "type": "crypto",
-      "id": "bitbar",
-      "symbol": "BTB",
-      "name": "Bitbar",
-      "interval": 10,
       "granularity": "1h"
     }
   ],
