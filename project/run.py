@@ -22,7 +22,7 @@ class Run(SampleBase):
         for character in text:
             if character == '.':
                 position -= 3
-            elif character in ['1', '-', '%']:
+            elif character in ['1', '-']:
                 position -= 5
             else:
                 position -= 6
@@ -47,7 +47,6 @@ class Run(SampleBase):
 		    # settings
             brightness = json_data['settings']['brightness']
             self.matrix.brightness = brightness
-            print(brightness)
             return type_display, interval, displays
         except:
             return None, 10, 1
@@ -99,7 +98,7 @@ class Run(SampleBase):
     def show_ip_data(self, offscreen_canvas, ip):
         offscreen_canvas.Clear()
         graphics.DrawText(offscreen_canvas, self.font, self.get_position_right(offscreen_canvas.width, ip), 16, self.blue, ip)
-        graphics.DrawText(offscreen_canvas, self.font, self.get_position_right(offscreen_canvas.width, ":3000"), 26, self.blue, ":3000")
+        graphics.DrawText(offscreen_canvas, self.font, self.get_position_right(offscreen_canvas.width, ":3000$$$$"), 26, self.blue, ":3000$$$$")
         self.matrix.SwapOnVSync(offscreen_canvas)
 
     def run(self):

@@ -34,7 +34,7 @@ def get_crypto_data(ticker, interval="1h"):
     prices = [entry[1] for entry in prices_by_interval]
     min_price = min(prices)
     max_price = max(prices)
-    max_height = 15
+    max_height = 14
     scale_factor = (max_price - min_price) / max_height
     
     chart = []
