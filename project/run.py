@@ -98,7 +98,7 @@ class Run(SampleBase):
     def show_ip_data(self, offscreen_canvas, ip):
         offscreen_canvas.Clear()
         graphics.DrawText(offscreen_canvas, self.font, self.get_position_right(offscreen_canvas.width, ip), 16, self.blue, ip)
-        graphics.DrawText(offscreen_canvas, self.font, self.get_position_right(offscreen_canvas.width, ":3000$$$$"), 26, self.blue, ":3000$$$$")
+        graphics.DrawText(offscreen_canvas, self.font, self.get_position_right(offscreen_canvas.width, ":3000"), 26, self.blue, ":3000")
         self.matrix.SwapOnVSync(offscreen_canvas)
 
     def run(self):
