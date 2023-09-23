@@ -1,5 +1,8 @@
 export const fetchDisplaysJSON = (setDisplays, setSettings) => {
-	fetch('config_displays.json')
+	const serverDomain = window.location.hostname;
+	const port = 3001;
+	const apiUrl = `http://${serverDomain}:${port}/get-json`;
+	fetch(apiUrl)
 		.then((res) => res.json())
 		.then((data) => {
 			setDisplays(data.displays);

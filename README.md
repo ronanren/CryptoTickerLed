@@ -15,8 +15,6 @@ Example of my result: asap
 
 total : ~150$ (with shipping)
 
-## Hardware configuration
-
 To connect the RGB Matrix to the Raspberry Pi, follow the instructions on the Adafruit website: https://learn.adafruit.com/adafruit-rgb-matrix-bonnet-for-raspberry-pi/driving-matrices
 
 ## Software

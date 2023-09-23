@@ -27,6 +27,17 @@ app.post('/write-json', (req, res) => {
 	}
 });
 
+app.get('/get-json', (req, res) => {
+	try {
+		const filePath = path.join(__dirname, 'public', 'config_displays.json');
+		const jsonData = JSON.parse(fs.readFileSync(filePath));
+		res.json(jsonData);
+	} catch (error) {
+		console.error('Error reading JSON file:', error);
+		res.status(500).json({ error: 'Internal Server Error' });
+	}
+});
+
 app.listen(3001, () => {
 	console.log('Server is running on port 3001');
 });
