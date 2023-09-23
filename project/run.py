@@ -10,9 +10,10 @@ class Run(SampleBase):
         self.font = graphics.Font()
         self.font.LoadFont("fonts/6x12.bdf")
         self.whiteColor = graphics.Color(255, 255, 255)
-        self.redColor = graphics.Color(255, 0, 0)
+        self.redColor = graphics.Color(100, 0, 0)
+	self.highRedColor = graphics.Color(255, 0, 0)
         self.greenColor = graphics.Color(0, 128, 0)
-        self.HighGreenColor = graphics.Color(0, 250, 100)
+        self.highGreenColor = graphics.Color(0, 250, 100)
         self.blue = graphics.Color(53, 0, 245)
 
         self.json_file_path = "app/public/config_displays.json"
@@ -83,9 +84,11 @@ class Run(SampleBase):
 
         for i in range(0, 64):
             nbr = 31 - chart[i]
-            graphics.DrawLine(offscreen_canvas, i, 31, i, nbr, self.greenColor)
-            offscreen_canvas.SetPixel(i, nbr, self.HighGreenColor.red, self.HighGreenColor.green, self.HighGreenColor.blue)
-
+            graphics.DrawLine(offscreen_canvas, i, 31, i, nbr, self.get_color_for_percent(percent))
+	    if (self.get_color_for_percent(percent) == self.greenColor): 
+            	offscreen_canvas.SetPixel(i, nbr, self.highGreenColor.red, self.highGreenColor.green, self.highGreenColor.blue)
+	    else:
+		offscreen_canvas.SetPixel(i, nbr, self.highRedColor.red, self.highRedColor.green, self.highRedColor.blue)
         self.matrix.SwapOnVSync(offscreen_canvas)
 
     def fetch_ip_data(self):
