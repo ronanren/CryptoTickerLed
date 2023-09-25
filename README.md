@@ -47,7 +47,7 @@ sudo ./run.py --led-gpio-mapping=adafruit-hat --led-rows=32 --led-cols=64 --led-
 
 I use the [CoinGecko API](https://www.coingecko.com/en/api/documentation) to get the current price of cryptocurrencies and the historical price to display the evolution of the price on the led matrix.
 
-To run the web application (and the json server api), you need to run:
+To test the web application and the json server api, you need to run:
 ```bash
 cd project/app 
 bun install

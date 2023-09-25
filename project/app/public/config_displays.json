@@ -1,22 +1,5 @@
 {
-  "displays": [
-    {
-      "type": "crypto",
-      "id": "bitcoin",
-      "symbol": "BTC",
-      "name": "Bitcoin",
-      "interval": 30,
-      "granularity": "1h"
-    },
-    {
-      "type": "crypto",
-      "id": "ethereum",
-      "symbol": "ETH",
-      "name": "Ethereum",
-      "interval": 30,
-      "granularity": "1h"
-    }
-  ],
+  "displays": [],
   "settings": {
     "brightness": 80
   }

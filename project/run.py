@@ -9,9 +9,12 @@ class Run(SampleBase):
         super(Run, self).__init__(*args, **kwargs)
         self.font = graphics.Font()
         self.font.LoadFont("fonts/6x12.bdf")
+        self.smallFont = graphics.Font()
+        self.smallFont.LoadFont("fonts/5x8.bdf")
+
         self.whiteColor = graphics.Color(255, 255, 255)
         self.redColor = graphics.Color(100, 0, 0)
-	self.highRedColor = graphics.Color(255, 0, 0)
+        self.highRedColor = graphics.Color(255, 0, 0)
         self.greenColor = graphics.Color(0, 128, 0)
         self.highGreenColor = graphics.Color(0, 250, 100)
         self.blue = graphics.Color(53, 0, 245)
@@ -85,10 +88,10 @@ class Run(SampleBase):
         for i in range(0, 64):
             nbr = 31 - chart[i]
             graphics.DrawLine(offscreen_canvas, i, 31, i, nbr, self.get_color_for_percent(percent))
-	    if (self.get_color_for_percent(percent) == self.greenColor): 
-            	offscreen_canvas.SetPixel(i, nbr, self.highGreenColor.red, self.highGreenColor.green, self.highGreenColor.blue)
-	    else:
-		offscreen_canvas.SetPixel(i, nbr, self.highRedColor.red, self.highRedColor.green, self.highRedColor.blue)
+        if (self.get_color_for_percent(percent) == self.greenColor): 
+            offscreen_canvas.SetPixel(i, nbr, self.highGreenColor.red, self.highGreenColor.green, self.highGreenColor.blue)
+        else:
+            offscreen_canvas.SetPixel(i, nbr, self.highRedColor.red, self.highRedColor.green, self.highRedColor.blue)
         self.matrix.SwapOnVSync(offscreen_canvas)
 
     def fetch_ip_data(self):
@@ -100,8 +103,8 @@ class Run(SampleBase):
 
     def show_ip_data(self, offscreen_canvas, ip):
         offscreen_canvas.Clear()
-        graphics.DrawText(offscreen_canvas, self.font, self.get_position_right(offscreen_canvas.width, ip), 16, self.blue, ip)
-        graphics.DrawText(offscreen_canvas, self.font, self.get_position_right(offscreen_canvas.width, ":3000"), 26, self.blue, ":3000")
+        graphics.DrawText(offscreen_canvas, self.smallFont, self.get_position_right(offscreen_canvas.width, ip), 16, self.blue, ip)
+        graphics.DrawText(offscreen_canvas, self.smallFont, self.get_position_right(offscreen_canvas.width, ":3000"), 26, self.blue, ":3000")
         self.matrix.SwapOnVSync(offscreen_canvas)
 
     def run(self):
@@ -117,6 +120,7 @@ class Run(SampleBase):
             current_modification_time = os.path.getmtime(self.json_file_path)
             if current_modification_time != last_modification_time:
                 display = 0
+                last_display_update = time.time()
                 type_display, interval, displays = self.fetch_type_display(display)
                 self.show_type_of_display(offscreen_canvas, type_display, display)
                 last_modification_time = current_modification_time
