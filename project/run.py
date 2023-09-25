@@ -13,10 +13,10 @@ class Run(SampleBase):
         self.smallFont.LoadFont("fonts/5x8.bdf")
 
         self.whiteColor = graphics.Color(255, 255, 255)
-        self.redColor = graphics.Color(100, 0, 0)
+        self.redColor = graphics.Color(40, 0, 0)
         self.highRedColor = graphics.Color(255, 0, 0)
-        self.greenColor = graphics.Color(0, 128, 0)
-        self.highGreenColor = graphics.Color(0, 250, 100)
+        self.greenColor = graphics.Color(0, 40, 0)
+        self.highGreenColor = graphics.Color(0, 240, 0)
         self.blue = graphics.Color(53, 0, 245)
 
         self.json_file_path = "app/public/config_displays.json"
@@ -32,11 +32,17 @@ class Run(SampleBase):
                 position -= 6
         return position
 
-    def get_color_for_percent(self, percent):
-        if percent.startswith("+"):
-            return self.greenColor
+    def get_color_for_percent(self, percent, level):
+        if percent.startswith("+") or percent == "0.00":
+	    if level == "low":
+                return self.greenColor
+ 	    else:
+	        return self.highGreenColor
         elif percent.startswith("-"):
-            return self.redColor
+	    if level == "low":
+                return self.redColor
+	    else:
+		return self.highRedColor
         else:
             return self.whiteColor
 
@@ -80,18 +86,18 @@ class Run(SampleBase):
     def show_crypto_data(self, offscreen_canvas, ticker, granularity, price, percent, chart):
         offscreen_canvas.Clear()
         graphics.DrawText(offscreen_canvas, self.font, 1, 8, self.whiteColor, ticker)
-        graphics.DrawText(offscreen_canvas, self.font, self.get_position_right(offscreen_canvas.width, percent), 8, self.get_color_for_percent(percent), percent)
+        graphics.DrawText(offscreen_canvas, self.font, self.get_position_right(offscreen_canvas.width, percent), 8, self.get_color_for_percent(percent, "high"), percent)
 
         graphics.DrawText(offscreen_canvas, self.font, 1, 16, self.whiteColor, price)
-        graphics.DrawText(offscreen_canvas, self.font, self.get_position_right(offscreen_canvas.width, granularity), 16, self.get_color_for_percent(percent), granularity)
+        graphics.DrawText(offscreen_canvas, self.font, self.get_position_right(offscreen_canvas.width, granularity), 16, self.get_color_for_percent(percent, "high"), granularity)
 
         for i in range(0, 64):
             nbr = 31 - chart[i]
-            graphics.DrawLine(offscreen_canvas, i, 31, i, nbr, self.get_color_for_percent(percent))
-        if (self.get_color_for_percent(percent) == self.greenColor): 
-            offscreen_canvas.SetPixel(i, nbr, self.highGreenColor.red, self.highGreenColor.green, self.highGreenColor.blue)
-        else:
-            offscreen_canvas.SetPixel(i, nbr, self.highRedColor.red, self.highRedColor.green, self.highRedColor.blue)
+            graphics.DrawLine(offscreen_canvas, i, 31, i, nbr, self.get_color_for_percent(percent, "low"))
+            if (self.get_color_for_percent(percent, "low") == self.greenColor):
+                offscreen_canvas.SetPixel(i, nbr, self.highGreenColor.red, self.highGreenColor.green, self.highGreenColor.blue)
+            else:
+                offscreen_canvas.SetPixel(i, nbr, self.highRedColor.red, self.highRedColor.green, self.highRedColor.blue)
         self.matrix.SwapOnVSync(offscreen_canvas)
 
     def fetch_ip_data(self):
