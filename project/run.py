@@ -10,7 +10,7 @@ class Run(SampleBase):
         self.font = graphics.Font()
         self.font.LoadFont("fonts/6x12.bdf")
         self.smallFont = graphics.Font()
-        self.smallFont.LoadFont("fonts/5x8.bdf")
+        self.smallFont.LoadFont("fonts/4x6.bdf")
 
         self.whiteColor = graphics.Color(255, 255, 255)
         self.redColor = graphics.Color(40, 0, 0)
@@ -34,15 +34,15 @@ class Run(SampleBase):
 
     def get_color_for_percent(self, percent, level):
         if percent.startswith("+") or percent == "0.00":
-	    if level == "low":
+            if level == "low":
                 return self.greenColor
- 	    else:
-	        return self.highGreenColor
+            else:
+                return self.highGreenColor
         elif percent.startswith("-"):
-	    if level == "low":
+            if level == "low":
                 return self.redColor
-	    else:
-		return self.highRedColor
+            else:
+                return self.highRedColor
         else:
             return self.whiteColor
 
