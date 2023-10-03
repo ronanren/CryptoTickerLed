@@ -6,15 +6,15 @@ The main objective of this project is to reproduce this project selling on
 
 Example of the led matrix:
 
-<img src="https://github.com/ronanren/CryptoTickerLed/blob/main/img/example1.jpg?raw=true" width="600">
+<img src="https://github.com/ronanren/CryptoTickerLed/blob/main/img/example1.jpg?raw=true" width="400">
 
-<img src="https://github.com/ronanren/CryptoTickerLed/blob/main/img/example2.jpg?raw=true" width="600">
+<img src="https://github.com/ronanren/CryptoTickerLed/blob/main/img/example2.jpg?raw=true" width="400">
 
 Example of the web application:
 
-<img src="https://github.com/ronanren/CryptoTickerLed/blob/main/img/webapp.png?raw=true" width="400">
+<img src="https://github.com/ronanren/CryptoTickerLed/blob/main/img/webapp.png?raw=true" width="300">
 
-<img src="https://github.com/ronanren/CryptoTickerLed/blob/main/img/webapp-settings.png?raw=true" width="400">
+<img src="https://github.com/ronanren/CryptoTickerLed/blob/main/img/webapp-settings.png?raw=true" width="300">
 
 ## Table of contents
 
@@ -63,7 +63,7 @@ sudo ./run.py --led-gpio-mapping=adafruit-hat --led-rows=32 --led-cols=64 --led-
 
 Workflow of the script:
 
-<img src="https://github.com/ronanren/CryptoTickerLed/blob/main/img/workflow-led.png?raw=true" width="600">
+<img src="https://github.com/ronanren/CryptoTickerLed/blob/main/img/workflow-led.png?raw=true" width="400">
 
 ## Web application
 
