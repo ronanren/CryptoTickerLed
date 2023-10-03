@@ -18,7 +18,11 @@ const DisplayForm = ({ onAddDisplay, coins }) => {
 	const [display, setDisplay] = useState(displayNull);
 
 	const handleAddDisplay = () => {
-		onAddDisplay(display);
+		if (display.type === "ip") {
+			onAddDisplay({ type: display.type, interval: display.interval });
+		} else {
+			onAddDisplay(display);
+		}
 	};
 
 	const formatResult = (item) => {
@@ -96,7 +100,7 @@ const DisplayForm = ({ onAddDisplay, coins }) => {
 					</NumberInputStepper>
 				</NumberInput>
 			</FormControl>
-			<Button colorScheme='blue' onClick={handleAddDisplay} mt={5} isDisabled={display.id === "" || display.interval < 10 || isNaN(display.interval)}>
+			<Button colorScheme='blue' onClick={handleAddDisplay} mt={5} isDisabled={(display.id === "" && display.type === "crypto") || display.interval < 10 || isNaN(display.interval)}>
 				Add Display
 			</Button>
 		</Flex>

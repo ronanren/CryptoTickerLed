@@ -23,28 +23,28 @@ const DisplayItem = ({ data, index, length, onMoveUp, onMoveDown, onDelete }) =>
 					</Text>
 					<Text>{type}</Text>
 				</Flex>
+				{type === "crypto" && (<>
+					<Flex flexDirection="row">
+						<Text fontWeight="bold">
+							Name:&nbsp;
+						</Text>
+						<Text>{name}</Text>
+					</Flex>
 
-				<Flex flexDirection="row">
-					<Text fontWeight="bold">
-						Name:&nbsp;
-					</Text>
-					<Text>{name}</Text>
-				</Flex>
+					<Flex flexDirection="row">
+						<Text fontWeight="bold">
+							Symbol:&nbsp;
+						</Text>
+						<Text>{symbol}</Text>
+					</Flex>
 
-				<Flex flexDirection="row">
-					<Text fontWeight="bold">
-						Symbol:&nbsp;
-					</Text>
-					<Text>{symbol}</Text>
-				</Flex>
-
-				<Flex flexDirection="row">
-					<Text fontWeight="bold">
-						Granularity:&nbsp;
-					</Text>
-					<Text>{granularity}</Text>
-				</Flex>
-
+					<Flex flexDirection="row">
+						<Text fontWeight="bold">
+							Granularity:&nbsp;
+						</Text>
+						<Text>{granularity}</Text>
+					</Flex>
+				</>)}
 				<Flex flexDirection="row">
 					<Text fontWeight="bold">
 						Interval:&nbsp;
