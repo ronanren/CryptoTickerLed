@@ -65,7 +65,7 @@ class Run(SampleBase):
         if type_display == "crypto":
             ticker, granularity, price, percent, chart = self.fetch_crypto_data(display)
             self.show_crypto_data(offscreen_canvas, ticker, granularity, price, percent, chart)
-        if type_display == None:
+        if type_display == "ip" or type_display == None:
             ip = self.fetch_ip_data()
             self.show_ip_data(offscreen_canvas, ip)
 
@@ -109,8 +109,8 @@ class Run(SampleBase):
 
     def show_ip_data(self, offscreen_canvas, ip):
         offscreen_canvas.Clear()
-        graphics.DrawText(offscreen_canvas, self.smallFont, self.get_position_right(offscreen_canvas.width, ip), 16, self.blue, ip)
-        graphics.DrawText(offscreen_canvas, self.smallFont, self.get_position_right(offscreen_canvas.width, ":3000"), 26, self.blue, ":3000")
+        graphics.DrawText(offscreen_canvas, self.smallFont, 1, 16, self.blue, ip)
+        graphics.DrawText(offscreen_canvas, self.smallFont, 1, 26, self.blue, ":3000")
         self.matrix.SwapOnVSync(offscreen_canvas)
 
     def run(self):

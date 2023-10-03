@@ -4,14 +4,32 @@ Crypto ticker led to show current price of cryptocurrencies on matrix led.
 The main objective of this project is to reproduce this project selling on 
 [Etsy](https://www.etsy.com/listing/1255228529/crypto-ticker-stocks-forex-live-price?ga_order=highest_reviews&ga_search_type=all&ga_view_type=gallery&ga_search_query=crypto+ticker&ref=sc_gallery-1-3&sts=1&plkey=7e51c8858f5ecf6c050067d96408ab1e714a4001%3A1255228529) for almost 200$.
 
-Example of my result: asap
+Example of the led matrix:
+
+<img src="https://github.com/ronanren/CryptoTickerLed/blob/main/img/example1.jpg?raw=true" width="600">
+
+<img src="https://github.com/ronanren/CryptoTickerLed/blob/main/img/example2.jpg?raw=true" width="600">
+
+Example of the web application:
+
+<img src="https://github.com/ronanren/CryptoTickerLed/blob/main/img/webapp.png?raw=true" width="400">
+
+<img src="https://github.com/ronanren/CryptoTickerLed/blob/main/img/webapp-settings.png?raw=true" width="400">
+
+## Table of contents
+
+- [Hardware](#hardware)
+- [Software](#software)
+- [Web application](#web-application)
+- [Run on startup](#run-on-startup)
+- [Troubleshooting](#troubleshooting)
 
 ## Hardware
 
-- Raspberry Pi (B+ in my case): 50$
-- 64x32 RGB LED Matrix - 4mm pitch - HUB75 interface - 256mm x 128mm: 40$ ([Amazon](https://www.amazon.fr/gp/product/B0B2ZC85KN/ref=ppx_yo_dt_b_asin_title_o00_s00?ie=UTF8&psc=1))
-- 5V 4A Power Supply with 5,5mm/2,1mm output: 20$ ([Amazon](https://www.amazon.fr/gp/product/B07NSSD9RJ/ref=ppx_yo_dt_b_asin_title_o00_s00?ie=UTF8&psc=1))
-- Adafruit RGB Matrix Bonnet for Raspberry Pi: 15$ ([Adafruit](https://www.adafruit.com/product/3211))
+- **Raspberry Pi** (B+ in my case): 50$
+- **64x32 RGB LED Matrix - 4mm pitch - HUB75 interface - 256mm x 128mm**: 40$ ([Amazon](https://www.amazon.fr/gp/product/B0B2ZC85KN/ref=ppx_yo_dt_b_asin_title_o00_s00?ie=UTF8&psc=1))
+- **5V 4A Power Supply with 5,5mm/2,1mm output**: 20$ ([Amazon](https://www.amazon.fr/gp/product/B07NSSD9RJ/ref=ppx_yo_dt_b_asin_title_o00_s00?ie=UTF8&psc=1))
+- **Adafruit RGB Matrix Bonnet for Raspberry Pi**: 15$ ([Adafruit](https://www.adafruit.com/product/3211))
 
 total : ~150$ (with shipping)
 
@@ -37,11 +55,15 @@ sudo make install-python
 
 Thanks to these Python bindings, I was able to create this project: https://github.com/hzeller/rpi-rgb-led-matrix/tree/master/bindings/python
 
-Test the matrix led:
+To test the matrix led, you need to run:
 ```bash
 cd project
-sudo ./run.py --led-gpio-mapping=adafruit-hat --led-rows=32 --led-cols=64 --led-slowdown-gpio=2
+sudo ./run.py --led-gpio-mapping=adafruit-hat --led-rows=32 --led-cols=64 --led-slowdown-gpio=4
 ```
+
+Workflow of the script:
+
+<img src="https://github.com/ronanren/CryptoTickerLed/blob/main/img/workflow-led.png?raw=true" width="600">
 
 ## Web application
 
@@ -68,3 +90,11 @@ After, run ```crontab -e``` and add this line:
 ```bash
 @reboot sleep 20 && /root/CryptoTickerLed/project/run.sh
 ```
+
+## Troubleshooting
+
+If you have a problem with the led matrix, you can check the logs:
+
+- ```/root/script.log``` : file for output logs
+- ```/root/script_error.log``` : file for error logs
+

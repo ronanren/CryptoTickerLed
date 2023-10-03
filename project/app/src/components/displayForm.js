@@ -44,8 +44,7 @@ const DisplayForm = ({ onAddDisplay, coins }) => {
 					onChange={(e) => setDisplay({ ...display, type: e.target.value })}
 				>
 					<option value="crypto">Crypto</option>
-					<option value="weather">Weather</option>
-					<option value="troll">Troll</option>
+					<option value="ip">IP address</option>
 				</Select>
 			</FormControl>
 			{display.type === "crypto" && (
@@ -80,22 +79,23 @@ const DisplayForm = ({ onAddDisplay, coins }) => {
 							<option value="1h">1 hour</option>
 						</Select>
 					</FormControl>
-					<FormControl>
-						<FormLabel>Interval</FormLabel>
-						<NumberInput
-							defaultValue={display.interval}
-							value={display.interval}
-							min={10}
-							clampValueOnBlur={false}
-							onChange={(e) => setDisplay({ ...display, interval: parseInt(e) })}
-						>
-							<NumberInputField />
-							<NumberInputStepper >
-								<NumberIncrementStepper />
-								<NumberDecrementStepper />
-							</NumberInputStepper>
-						</NumberInput>
-					</FormControl></>)}
+				</>)}
+			<FormControl>
+				<FormLabel>Interval</FormLabel>
+				<NumberInput
+					defaultValue={display.interval}
+					value={display.interval}
+					min={10}
+					clampValueOnBlur={false}
+					onChange={(e) => setDisplay({ ...display, interval: parseInt(e) })}
+				>
+					<NumberInputField />
+					<NumberInputStepper >
+						<NumberIncrementStepper />
+						<NumberDecrementStepper />
+					</NumberInputStepper>
+				</NumberInput>
+			</FormControl>
 			<Button colorScheme='blue' onClick={handleAddDisplay} mt={5} isDisabled={display.id === "" || display.interval < 10 || isNaN(display.interval)}>
 				Add Display
 			</Button>
