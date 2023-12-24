@@ -1,0 +1,9 @@
+services:
+  matrix:
+    build:
+      context: .
+    devices:
+      - '/dev/gpiomem:/dev/gpiomem'
+      - '/dev/mem:/dev/mem'
+    restart: no
+    privileged: true
