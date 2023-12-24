@@ -98,3 +98,9 @@ If you have a problem with the led matrix, you can check the logs:
 - ```/root/script.log``` : file for output logs
 - ```/root/script_error.log``` : file for error logs
 
+## Docker setup
+
+```bash
+docker-compose up -d
+```
+
