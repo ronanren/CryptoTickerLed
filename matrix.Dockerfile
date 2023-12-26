@@ -11,8 +11,6 @@ RUN apt-get update && apt-get install -y git make build-essential python3 python
 
 RUN $(which python3) -m pip install requests
 
-COPY . /CryptoTickerLed
-
-WORKDIR /CryptoTickerLed/project
+WORKDIR /app/project
 
 ENTRYPOINT ["python3", "./run.py", "--led-gpio-mapping=adafruit-hat", "--led-rows=32", "--led-cols=64", "--led-slowdown-gpio=4"]

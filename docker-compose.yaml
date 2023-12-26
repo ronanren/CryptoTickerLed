@@ -2,8 +2,25 @@ services:
   matrix:
     build:
       context: .
+      dockerfile: matrix.Dockerfile
     devices:
       - '/dev/gpiomem:/dev/gpiomem'
       - '/dev/mem:/dev/mem'
-    restart: no
+    volumes:
+      - shared_volume:/app
+    restart: 'on-failure' 
     privileged: true
+    
+  app:
+    build:
+      context: .
+      dockerfile: app.Dockerfile
+    ports:
+      - '80:3000'
+      - '3001:3001'
+    volumes:
+      - shared_volume:/app
+    restart: 'on-failure'
+
+volumes:
+  shared_volume:
