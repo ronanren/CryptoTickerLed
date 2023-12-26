@@ -8,9 +8,11 @@ services:
       - '/dev/mem:/dev/mem'
     volumes:
       - shared_volume:/app
-    restart: 'on-failure' 
+    restart: 'on-failure'
     privileged: true
-    
+    depends_on:
+      - app
+
   app:
     build:
       context: .
