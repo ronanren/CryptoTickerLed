@@ -1,9 +1,9 @@
-FROM oven/bun:1
+FROM node:14-alpine
 
 COPY . /app
 
 WORKDIR /app/project/app
 
-RUN bun install
+RUN npm install
 
-CMD bash -c "bun run server.js & bun run start"
+CMD bash -c "node server.js & npm start"

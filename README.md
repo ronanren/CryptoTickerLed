@@ -23,6 +23,7 @@ The main objective of this project is to reproduce this project selling on
 - [Web application](#web-application)
 - [Run on startup](#run-on-startup)
 - [Troubleshooting](#troubleshooting)
+- [Docker setup](#docker-setup)
 
 ## Hardware
 
